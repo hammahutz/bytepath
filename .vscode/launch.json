@@ -5,12 +5,22 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "LÖVE2D Debug",
+            "type": "lua-local",
+            "request": "launch",
+            "program": {
+                "command": "love",
+            },
+            "args": ["."]
+        },
+        
+        {
             "name": "Debug Lua Interpreter",
             "type": "lua-local",
             "request": "launch",
             "program": {
-                "lua": "lua",
-                "file": "${file}"
+                "lua": "lua54",
+                "file": "${workspaceFolder}/main.lua}"
             }
         },
         {
@@ -21,15 +31,6 @@
                 "command": "command"
             },
             "args": []
-        }
-        {
-            "name": "LÖVE2D Debug",
-            "type": "lua-local",
-            "request": "launch",
-            "program": {
-                "command": "love",
-            },
-            "args": ["."]
-        }
+        },
     ]
 }
