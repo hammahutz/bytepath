@@ -1,1 +1,1 @@
-lovec .
+lovec .\source\

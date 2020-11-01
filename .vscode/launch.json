@@ -19,14 +19,14 @@
             "name": "LÖVE2D Debug in PowerShell",
             "type": "PowerShell",
             "request": "launch",
-            "script": "${workspaceFolder}/run.ps1",
+            "script": "${workspaceFolder}/power-shell/run.ps1",
             "cwd": "${workspaceFolder}"
         },
         {
             "name": "LÖVE2D Build and Run",
             "type": "PowerShell",
             "request": "launch",
-            "script": "${workspaceFolder}/build-and-run.ps1",
+            "script": "${workspaceFolder}/power-shell/build-and-run.ps1",
             "cwd": "${workspaceFolder}"
         },
     ]

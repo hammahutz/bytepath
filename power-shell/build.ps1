@@ -13,5 +13,4 @@ Copy-Item -Path "build\build-cache\Game.zip" -Destination "build\build-cache\Gam
 
 #Make .exe file
 cmd /c copy /b build\build-cache\love.exe+build\build-cache\Game.love build\Game.exe
-Rename-Item "build\Game.exe" ((Get-Content "game-config/config.json" | ConvertFrom-Json | select -expand "game-name" +) + ".exe")
-# Pause
+Rename-Item "build\Game.exe" ((Get-Content "game-config\config.json" | ConvertFrom-Json | select -expand "game-name" +) + ".exe")
