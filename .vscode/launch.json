@@ -5,32 +5,29 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "LÖVE2D Debug",
+            "name": "LÖVE2D Debug in VSCode",
             "type": "lua-local",
             "request": "launch",
             "program": {
-                "command": "love",
+                "command": "lovec",
             },
-            "args": ["."]
-        },
-        
-        {
-            "name": "Debug Lua Interpreter",
-            "type": "lua-local",
-            "request": "launch",
-            "program": {
-                "lua": "lua54",
-                "file": "${workspaceFolder}/main.lua}"
-            }
+            "args": [
+                "${workspaceFolder}/source"
+            ]
         },
         {
-            "name": "Debug Custom Lua Environment",
-            "type": "lua-local",
+            "name": "LÖVE2D Debug in PowerShell",
+            "type": "PowerShell",
             "request": "launch",
-            "program": {
-                "command": "command"
-            },
-            "args": []
+            "script": "${workspaceFolder}/run.ps1",
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "name": "LÖVE2D Build and Run",
+            "type": "PowerShell",
+            "request": "launch",
+            "script": "${workspaceFolder}/build-and-run.ps1",
+            "cwd": "${workspaceFolder}"
         },
     ]
 }

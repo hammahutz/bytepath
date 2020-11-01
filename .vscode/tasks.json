@@ -1,17 +1,22 @@
 {
-    "version": "2.0.0",
     "tasks": [
-      {
-        "label": "Run Lua",
-        "type": "shell",
-        "command": "lua53",
-        "args": [
-          "${file}"
-        ],
-        "group": {
-          "kind": "build",
-          "isDefault": true
+        {
+            "type": "script",
+            "scriptType": "powershell",
+            "path": "power-shell/",
+            "fileName": "build.ps1",
+            "scriptFile": true,
+            "requiresArgs": false,
+            "uri": {
+                "$mid": 1,
+                "fsPath": "f:\\MinaFiler\\LÖVE\\bytepath\\power-shell\\build.ps1",
+                "_sep": 1,
+                "path": "/f:/MinaFiler/LÖVE/bytepath/power-shell/build.ps1",
+                "scheme": "file"
+            },
+            "problemMatcher": [],
+            "label": "powershell: build.ps1",
+            "group": "build"
         }
-      }
     ]
-  }
+}

@@ -1,13 +1,10 @@
 Circle = Object:extend()
 
- 
-local self
-
 function Circle:new(posX, posY, radius)
     self.PosistionX = posX or 0
     self.PosistionY = posY or 0
     self.Radius = radius or 0
-
+    
     self.CreationTime = 2
     self.Print = false
 end
