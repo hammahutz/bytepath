@@ -1,0 +1,25 @@
+<Entitys xmlns:meta="Editor">
+	<Entity Name="Hello">
+		<Sprite>
+			<Draw>true</Draw>
+		</Sprite>
+		<Inventory>
+			<Equipment>
+				<Weapon />
+			</Equipment>
+		</Inventory>
+	</Entity>
+	<Entity Name="Good Bye">
+		<Sprite>
+			<Draw>true</Draw>
+		</Sprite>
+		<Inventory>
+			<Equipment>
+				<Weapon />
+			</Equipment>
+			<Equipment>
+				<Weapon />
+			</Equipment>
+		</Inventory>
+	</Entity>
+</Entitys>

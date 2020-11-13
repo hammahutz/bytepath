@@ -1,0 +1,21 @@
+<Definitions xmlns:meta="Editor">
+	<Definition Name="Entitys" meta:RefKey="Collection">
+		<Data Name="Entity" HasAttributes="True" meta:RefKey="Struct">
+			<Attributes meta:RefKey="Attributes">
+				<Attribute Name="Name" meta:RefKey="String" />
+			</Attributes>
+			<Data Name="Sprite" meta:RefKey="Struct">
+				<Data Name="Draw" meta:RefKey="Boolean" />
+				<Data Name="Sprite" BasePath="../helo/" AllowedFileTypes="png" meta:RefKey="File" />
+			</Data>
+			<Data Name="Inventory" meta:RefKey="Collection">
+				<Data Name="Equipment" meta:RefKey="Collection">
+					<Data Name="Weapon" meta:RefKey="Struct">
+						<Data Name="Slot" EnumValues="Weapon" meta:RefKey="Enum" />
+						<Data Name="Type" EnumValues="Assult" meta:RefKey="Enum" />
+					</Data>
+				</Data>
+			</Data>
+		</Data>
+	</Definition>
+</Definitions>

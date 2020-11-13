@@ -1,4 +1,4 @@
 function love.conf(t)
-    t.identity = "Hello :D"
+    t.identity = "BYTEPATH"
     t.window.title ="BYTEPATH"
 end

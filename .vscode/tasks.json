@@ -9,9 +9,9 @@
             "requiresArgs": false,
             "uri": {
                 "$mid": 1,
-                "fsPath": "f:\\MinaFiler\\LÖVE\\bytepath\\power-shell\\build.ps1",
+                "fsPath": "f:\\MinaFiler\\Love2D\\bytepath\\power-shell\\build.ps1",
                 "_sep": 1,
-                "path": "/f:/MinaFiler/LÖVE/bytepath/power-shell/build.ps1",
+                "path": "/f:/MinaFiler/Love2D/bytepath/power-shell/build.ps1",
                 "scheme": "file"
             },
             "problemMatcher": [],

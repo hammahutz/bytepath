@@ -1,0 +1,93 @@
+{
+    "sheets": [
+        {
+            "name": "newSheet",
+            "description": "description of what the sheet is",
+            "displayColumn": "id",
+            "guid": "24e6dd19-7602-40fe-beb2-d52620b1e100",
+            "columns": [
+                {
+                    "typeStr": "int",
+                    "guid": "d33fefac-906f-4272-8c2e-5a62385563bf",
+                    "description": "int field",
+                    "name": "newInt",
+                    "min": -10000,
+                    "max": 100000,
+                    "defaultValue": 0,
+                    "iconName": "newInt",
+                    "configurable": {
+                        "name": "text",
+                        "description": "text",
+                        "min": "int",
+                        "max": "int",
+                        "defaultValue": "int"
+                    }
+                },
+                {
+                    "typeStr": "file",
+                    "guid": "65e5595f-a576-48b9-ae9b-ecd4e60b023e",
+                    "name": "newFile",
+                    "description": "new file field",
+                    "defaultValue": "",
+                    "iconName": "newFile",
+                    "configurable": {
+                        "name": "text",
+                        "description": "text",
+                        "defaultValue": "text"
+                    }
+                }
+            ],
+            "lines": [
+                {
+                    "guid": "8670b12c-c179-48b3-a059-9ac858851a31",
+                    "id": "0",
+                    "newInt": 0,
+                    "newFile": ""
+                }
+            ],
+            "hidden": false,
+            "isProps": false,
+            "configurable": {
+                "name": "text",
+                "description": "text",
+                "displayColumn": "columnSelect@name",
+                "columnSelect@name@displayColumn": {
+                    "allowedTypes": [
+                        "int",
+                        "float",
+                        "text",
+                        "longtext"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "newSheets",
+            "description": "description of what the sheet is",
+            "displayColumn": "id",
+            "guid": "880875e4-6663-4728-9e7d-d25182da7428",
+            "columns": [],
+            "lines": [
+                {
+                    "guid": "f966a705-23ff-4efb-b3a0-bf05fa600596",
+                    "id": "0"
+                }
+            ],
+            "hidden": false,
+            "isProps": false,
+            "configurable": {
+                "name": "text",
+                "description": "text",
+                "displayColumn": "columnSelect@name",
+                "columnSelect@name@displayColumn": {
+                    "allowedTypes": [
+                        "int",
+                        "float",
+                        "text",
+                        "longtext"
+                    ]
+                }
+            }
+        }
+    ]
+}
