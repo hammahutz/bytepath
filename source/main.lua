@@ -3,6 +3,7 @@ Object = require "/libraries/classic/classic"
 require "/objects/Objects"
 Input = require "/libraries/boipushy/Input"
 Timer = require "/libraries/hump/timer"
+Moses = require "/libraries/Moses/moses"
 
 local circle, circle2, hyperCircle
 
@@ -26,7 +27,7 @@ function love.load()
     input = Input()
     input:bind(1, 'test')
     input:bind('d', 'damage')
-
+    
     timer = Timer()
     
     -- timer:every(1, function()print(love.math.random()) end, 5)
@@ -36,11 +37,17 @@ function love.load()
     rect_2 = {x = 400, y = 300, w = 200, h = 50}
     start_cross_animation()
     
-    health_top = {x = 600, y = 500, w = 200, h = 50, color = {red = 1.0, green = 0.0, blue =  0.0}}
-    health_bottom = {x = 600, y = 500, w = 200, h = 50, color = {red = 0.5, green = 0.0, blue =  0.0}}
+    health_top = {x = 600, y = 500, w = 200, h = 50, color = {red = 1.0, green = 0.0, blue = 0.0}}
+    health_bottom = {x = 600, y = 500, w = 200, h = 50, color = {red = 0.5, green = 0.0, blue = 0.0}}
+
+    rooms = {}
+    current_room = nil
 end
 
 function love.update(dt)
+    if current_room then current_room:update(dt) end
+
+
     circle:update(dt)
     circle2:update(dt)
     hyperCircle:update(dt)
@@ -54,11 +61,11 @@ function love.update(dt)
     if input:down('test') then print('down') end
     
     timer:update(dt)
-
+    
     if input:pressed('damage') then
         local damage = 50
-        timer:tween(0.25, health_top, {w = health_top.w - damage, x = health_top.x - damage / 2}, 'in-cubic', function ()
-            timer:tween(2, health_bottom, {w = health_bottom.w - damage, x = health_bottom.x - damage / 2}, 'in-cubic')       
+        timer:tween(0.25, health_top, {w = health_top.w - damage, x = health_top.x - damage / 2}, 'in-cubic', function()
+            timer:tween(2, health_bottom, {w = health_bottom.w - damage, x = health_bottom.x - damage / 2}, 'in-cubic')
         end)
     end
 
@@ -66,6 +73,9 @@ function love.update(dt)
 end
 
 function love.draw()
+
+    if current_room then current_room:draw() end
+
     circle:draw()
     circle2:draw()
     hyperCircle:draw()
@@ -80,10 +90,10 @@ function love.draw()
     
     love.graphics.rectangle('fill', rect_1.x - rect_1.w / 2, rect_1.y - rect_1.h / 2, rect_1.w, rect_1.h)
     love.graphics.rectangle('fill', rect_2.x - rect_2.w / 2, rect_2.y - rect_2.h / 2, rect_2.w, rect_2.h)
-
+    
     love.graphics.setColor(health_bottom.color.red, health_bottom.color.green, health_bottom.color.blue)
     love.graphics.rectangle('fill', health_bottom.x - health_bottom.w / 2, health_bottom.y - health_bottom.h / 2, health_bottom.w, health_bottom.h)
-
+    
     love.graphics.setColor(health_top.color.red, health_top.color.green, health_top.color.blue)
     love.graphics.rectangle('fill', health_top.x - health_top.w / 2, health_top.y - health_top.h / 2, health_top.w, health_top.h)
 end
@@ -118,4 +128,18 @@ function start_cross_animation()
             timer:tween(1, rect_2, {h = 50}, 'in-out-cubic')
         end)
     end)
+end
+
+function addRoom(room_type, room_name, ...)
+    local room = _G[room_type](room_name, ...)
+    rooms[room_name] = room
+    return room
+end
+
+function gotoRoom(room_type, room_name, ...)
+    if current_room and rooms[room_name] then
+        if current_room.deactivate then current_room:deactivate() end
+        current_room = rooms[room_name]
+        if current_room.activate then current_room:activate() end
+    else current_room = addRoom(room_type, room_name, ...) end
 end
