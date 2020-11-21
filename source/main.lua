@@ -7,8 +7,12 @@ Moses = require "/libraries/Moses/moses"
 Lume = require "/libraries/lume/lume"
 Utils = require "/utils"
 
+debug = true
+
 
 function love.load()
+    setupGameWindow()
+
     Objects.load()
 
     input = Input()
@@ -17,28 +21,7 @@ function love.load()
 
     rooms = {}
     current_room = nil
-    gotoRoom("StageOne", 10)
-
-    printAll(1, 2, 3, 4, 5, 6, 7, 8, 9)
-    printText(1, 2, 3, 4, 5, 6, 7, 8, 9)
-end
-
-function printAll(...)
-    local localArg = {...}
-    local printResultat = ""
-    for key, value in ipairs(localArg) do
-        printResultat = printResultat .. tostring(value) .. ("\n")
-    end
-    print(printResultat)
-end
-
-function printText(...)
-    local localArg = {...}
-    local printResult = ""
-    for key, value in ipairs(localArg) do
-        printResult = printResult .. tostring(value)
-    end
-    print(printResult)
+    goToRoom("Stage", 0)
 end
 
 function love.update(dt)
@@ -60,7 +43,7 @@ function addRoom(room_type, room_name, ...)
     return room
 end
 
-function gotoRoom(room_type, room_name, ...)
+function goToRoom(room_type, room_name, ...)
     if current_room and rooms[room_name] then
 
         if current_room.deactivate then 
@@ -75,4 +58,35 @@ function gotoRoom(room_type, room_name, ...)
     else 
         current_room = addRoom(room_type, room_name, ...) 
     end
+end
+
+function setupGameWindow()
+    local windowMode = {love.window.getMode()}
+    local width, height = love.window.getDesktopDimensions(windowMode[3].display)
+
+    if debug then
+        print("Screen width: " .. width .. " Screen height: " .. height)
+    end
+
+    game_screen_width = width / game_screen_resulution_denominator
+    game_screen_height = height / game_screen_resulution_denominator
+    love.window.setMode(game_screen_width, game_screen_height, windowMode[3])
+
+    if debug then
+        print("Window width: " .. game_screen_width .. " Window height: " .. game_screen_height)
+    end
+
+    resizeScreen(game_screen_resulution_denominator)
+end
+
+function resizeScreen(scale)
+    game_screen_width_scale, game_screen_height_scale = scale, scale
+    if debug then
+        print(game_screen_width)
+        print(game_screen_height)
+        print(game_screen_width_scale)
+        print(game_screen_height_scale)
+    end
+
+    love.window.setMode(game_screen_width * game_screen_width_scale, game_screen_height * game_screen_height_scale)
 end

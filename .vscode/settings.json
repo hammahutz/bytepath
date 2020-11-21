@@ -4,5 +4,8 @@
         "test_instance",
         "image",
         "start_cross_animation"
+    ],
+    "Lua.diagnostics.disable": [
+        "lowercase-global"
     ]
 }
