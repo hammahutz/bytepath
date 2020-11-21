@@ -10,3 +10,6 @@
 [submodule "source/libraries/Moses"]
 	path = source/libraries/Moses
 	url = https://github.com/Yonaba/Moses.git
+[submodule "source/libraries/lume"]
+	path = source/libraries/lume
+	url = https://github.com/rxi/lume.git
