@@ -1,0 +1,12 @@
+[submodule "source/libraries/classic"]
+	path = source/libraries/classic
+	url = https://github.com/rxi/classic.git
+[submodule "source/libraries/boipushy"]
+	path = source/libraries/boipushy
+	url = https://github.com/a327ex/boipushy.git
+[submodule "source/libraries/hump"]
+	path = source/libraries/hump
+	url = https://github.com/vrld/hump.git
+[submodule "source/libraries/Moses"]
+	path = source/libraries/Moses
+	url = https://github.com/Yonaba/Moses.git
