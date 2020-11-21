@@ -76,7 +76,7 @@ function setupGameWindow()
         print("Window width: " .. game_screen_width .. " Window height: " .. game_screen_height)
     end
 
-    resizeScreen(game_screen_resulution_denominator)
+    resizeScreen(game_screen_resulution_upscale)
 end
 
 function resizeScreen(scale)
@@ -88,5 +88,6 @@ function resizeScreen(scale)
         print(game_screen_height_scale)
     end
 
-    love.window.setMode(game_screen_width * game_screen_width_scale, game_screen_height * game_screen_height_scale)
+    -- local _, _, flags = love.window.getMode()
+    love.window.setMode(game_screen_width * game_screen_width_scale, game_screen_height * game_screen_height_scale)--, flags)
 end
