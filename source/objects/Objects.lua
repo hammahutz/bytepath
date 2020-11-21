@@ -1,7 +1,4 @@
 Objects = Object:extend()
-function Objects:new()
-
-end
 
 function Objects.load()
     local object_files = {}
