@@ -6,9 +6,9 @@ Timer = require "/libraries/hump/timer"
 Moses = require "/libraries/Moses/moses"
 Lume = require "/libraries/lume/lume"
 Utils = require "/utils"
+Camera = require "/libraries/STALKER-X/Camera"
 
 debug = true
-
 
 function love.load()
     setupGameWindow()
@@ -19,15 +19,22 @@ function love.load()
 
     timer = Timer()
 
+    camera = Camera()
+    input:bind("f3", function()
+        camera:shake(200, 1, 200)
+    end)
+
     rooms = {}
     current_room = nil
     goToRoom("Stage", 0)
+    print(tostring(random(250, 300)))
 end
 
 function love.update(dt)
     if current_room then
         current_room:update(dt)
     end
+    camera:update(dt)
 end
 
 function love.draw()
@@ -46,17 +53,17 @@ end
 function goToRoom(room_type, room_name, ...)
     if current_room and rooms[room_name] then
 
-        if current_room.deactivate then 
-            current_room:deactivate() 
+        if current_room.deactivate then
+            current_room:deactivate()
         end
 
         current_room = rooms[room_name]
 
-        if current_room.activate then 
-            current_room:activate() 
+        if current_room.activate then
+            current_room:activate()
         end
-    else 
-        current_room = addRoom(room_type, room_name, ...) 
+    else
+        current_room = addRoom(room_type, room_name, ...)
     end
 end
 
@@ -64,30 +71,17 @@ function setupGameWindow()
     local windowMode = {love.window.getMode()}
     local width, height = love.window.getDesktopDimensions(windowMode[3].display)
 
-    if debug then
-        print("Screen width: " .. width .. " Screen height: " .. height)
-    end
+    love.graphics.setDefaultFilter("nearest")
+    love.graphics.setLineStyle("rough")
 
     game_screen_width = width / game_screen_resulution_denominator
     game_screen_height = height / game_screen_resulution_denominator
     love.window.setMode(game_screen_width, game_screen_height, windowMode[3])
-
-    if debug then
-        print("Window width: " .. game_screen_width .. " Window height: " .. game_screen_height)
-    end
 
     resizeScreen(game_screen_resulution_upscale)
 end
 
 function resizeScreen(scale)
     game_screen_width_scale, game_screen_height_scale = scale, scale
-    if debug then
-        print(game_screen_width)
-        print(game_screen_height)
-        print(game_screen_width_scale)
-        print(game_screen_height_scale)
-    end
-
-    -- local _, _, flags = love.window.getMode()
-    love.window.setMode(game_screen_width * game_screen_width_scale, game_screen_height * game_screen_height_scale)--, flags)
+    love.window.setMode(game_screen_width * game_screen_width_scale, game_screen_height * game_screen_height_scale) -- , flags)
 end

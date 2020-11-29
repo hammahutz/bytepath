@@ -13,3 +13,9 @@
 [submodule "source/libraries/lume"]
 	path = source/libraries/lume
 	url = https://github.com/rxi/lume.git
+[submodule "source/libraries/ModifiedCamera"]
+	path = source/libraries/ModifiedCamera
+	url = https://github.com/a327ex/ModifiedCamera.git
+[submodule "source/libraries/STALKER-X"]
+	path = source/libraries/STALKER-X
+	url = https://github.com/a327ex/STALKER-X.git
