@@ -21,7 +21,7 @@ function Stage:new()
 end
 
 function Stage:update(dt)
-    print(tostring(self.player.dead))
+    self.area:update(dt)
     self.super:update(dt)
 end
 

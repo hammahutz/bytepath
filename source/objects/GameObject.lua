@@ -11,6 +11,7 @@ function GameObject:new(area, x, y, options)
 
     self.area = area
     self.x, self.y = x, y
+    self.id = UUID()
     self.dead = false
     self.timer = Timer()
 end

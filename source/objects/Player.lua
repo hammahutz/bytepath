@@ -2,6 +2,7 @@ Player = GameObject:extend()
 
 function Player:new(area, x, y, options)
     Player.super:new(area, x, y, options)
+    print(self.id)
 end
 
 function Player:update(dt)

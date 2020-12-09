@@ -27,7 +27,6 @@ function love.load()
     rooms = {}
     current_room = nil
     goToRoom("Stage", 0)
-    print(tostring(random(250, 300)))
 end
 
 function love.update(dt)
