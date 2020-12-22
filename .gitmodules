@@ -19,3 +19,6 @@
 [submodule "source/libraries/STALKER-X"]
 	path = source/libraries/STALKER-X
 	url = https://github.com/a327ex/STALKER-X.git
+[submodule "source/libraries/windfield"]
+	path = source/libraries/windfield
+	url = https://github.com/a327ex/windfield.git

@@ -13,6 +13,8 @@ end
 
 function Stage:new()
     self.area = Area(self)
+    self.area:addPhysicsWorld()
+
     self.player = self.area:addGameObject("Player", game_screen_width / 2, game_screen_height / 2)
     input:bind("f2", function() self.player.dead = true end)
 
@@ -33,4 +35,3 @@ function Stage:draw()
     love.graphics.draw(self.main_canvas, 0, 0, 0, game_screen_width_scale, game_screen_width_scale)
     love.graphics.setBlendMode('alpha')
 end
-

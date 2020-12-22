@@ -11,3 +11,11 @@ function random(min, max)
     local min, max = min or 0, max or 1
     return (min < max and (love.math.random() * (max - min) + min)) or (love.math.random() * (min - max) + max)
 end
+
+function printf(...)
+    local output = ""
+    for key, value in ipairs(arg) do
+        -- output = output .. " key: " .. key .. " value: " .. value
+        print(tostring(value))
+    end
+end

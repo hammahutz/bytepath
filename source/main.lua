@@ -12,17 +12,15 @@ debug = true
 
 function love.load()
     setupGameWindow()
-
     Objects.load()
-
-    input = Input()
-
     timer = Timer()
-
     camera = Camera()
+    input = Input()
     input:bind("f3", function()
         camera:shake(200, 1, 200)
     end)
+    input:bind("left", "left")
+    input:bind("right", "right")
 
     rooms = {}
     current_room = nil
