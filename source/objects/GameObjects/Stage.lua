@@ -35,3 +35,8 @@ function Stage:draw()
     love.graphics.draw(self.main_canvas, 0, 0, 0, game_screen_width_scale, game_screen_width_scale)
     love.graphics.setBlendMode('alpha')
 end
+
+function Stage:destroy()
+    self.area:destroy()
+    self.area = nil
+end

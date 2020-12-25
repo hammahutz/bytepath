@@ -3,11 +3,6 @@ Physics = GameObject:extend()
 function Physics:new(area, x, y, options)
     Physics.super:new(area, x, y, options)
     self.colliders = {}
-
-
-    local mouseX, mouseY = love.mouse.getPosition()
-
-    -- self:newCircleCollider(area, mouseX, mouseY, "", 10)
     return self
 end
 
@@ -19,10 +14,6 @@ function Physics:update(dt)
             end
         end
     end
-    --Debug
-    -- local mouseX, mouseY = love.mouse.getPosition()
-    -- self.colliders[1].x = mouseX / game_screen_width_scale
-    -- self.colliders[1].y = mouseY / game_screen_height_scale
 end
 
 function Physics:draw()
@@ -54,5 +45,11 @@ function Physics:checkCollision(collider_a, collider_b)
 
     if (katet_a + katet_b) < hypotenusa then
         print("hit")
+    end
+end
+
+function Physics:destroy()
+    for _, collider in ipairs(self.colliders) do
+        collider = nil
     end
 end

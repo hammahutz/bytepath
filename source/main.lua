@@ -25,6 +25,23 @@ function love.load()
     rooms = {}
     current_room = nil
     goToRoom("Stage", 0)
+    --debug
+    input:bind('f1', function()
+        print("Before collection: " .. collectgarbage("count")/1024)
+        collectgarbage()
+        print("After collection: " .. collectgarbage("count")/1024)
+        print("Object count: ")
+        local counts = type_count()
+        for k, v in pairs(counts) do print(k, v) end
+        print("-------------------------------------")
+    end)
+
+    input:bind('f2', function()
+        goToRoom("Stage", 1)
+    end)
+
+
+
 end
 
 function love.update(dt)
@@ -48,20 +65,24 @@ function addRoom(room_type, room_name, ...)
 end
 
 function goToRoom(room_type, room_name, ...)
-    if current_room and rooms[room_name] then
 
-        if current_room.deactivate then
-            current_room:deactivate()
-        end
+    if current_room and current_room.destroy then current_room:destroy() end
+    current_room = _G[room_type](...)
 
-        current_room = rooms[room_name]
+    -- if current_room and rooms[room_name] then
 
-        if current_room.activate then
-            current_room:activate()
-        end
-    else
-        current_room = addRoom(room_type, room_name, ...)
-    end
+    --     if current_room.deactivate then
+    --         current_room:deactivate()
+    --     end
+
+    --     current_room = rooms[room_name]
+
+    --     if current_room.activate then
+    --         current_room:activate()
+    --     end
+    -- else
+    --     current_room = addRoom(room_type, room_name, ...)
+    -- end
 end
 
 function setupGameWindow()

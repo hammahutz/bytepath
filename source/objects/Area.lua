@@ -23,7 +23,10 @@ function Area:updateGameObjects(dt)
     for i = #self.game_objects, 1, -1 do
         local game_object = self.game_objects[i]
         game_object:update(dt)
-        if game_object.dead then table.remove(self.game_objects, i) end
+        if game_object.dead then 
+            game_object:destroy()
+            table.remove(self.game_objects, i)
+        end
     end
 end
 
@@ -36,4 +39,18 @@ end
 
 function Area:addPhysicsWorld()
     self.world = Physics:new(self, 0, 0)
+end
+
+function Area:destroy()
+    for i = #self.game_objects, 1, -1 do
+        local game_object = self.game_objects[i]
+        game_object:destroy()
+        table.remove(self.game_objects, i)
+    end
+    self.game_objects = {}
+
+    if self.world then
+        self.world:destroy()
+        self.world = nil
+    end
 end

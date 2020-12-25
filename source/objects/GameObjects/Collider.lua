@@ -13,3 +13,7 @@ end
 function Collider:getPosition()
     return self.x, self.y
 end
+
+function Collider:destroy()
+    self = nil
+end
