@@ -3,6 +3,8 @@ game_screen_height = 1080
 game_screen_resulution_denominator = 4
 game_screen_resulution_upscale = 3
 
+default_color =  {255, 255, 255, 255}
+
 function love.conf(t)
     t.window.title ="BYTEPATH"
     t.window.width = game_screen_width / game_screen_resulution_denominator

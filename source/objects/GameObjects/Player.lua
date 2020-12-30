@@ -14,7 +14,7 @@ function Player:new(area, x, y, options)
     self.acceleration = 0.05
     
     self.timer:every(0.24, function ()
-        self.shoot()
+        self:shoot()
     end)
 end
 
@@ -39,5 +39,6 @@ function Player:draw()
 end
 
 function Player:shoot()
-    self.area:addGameObject("ShootEffect", self.x + 1.2 * self.w * math.cos(self.r), self.y + 1.2 * self.w * math.sin(self.r))
+    local delta = 1.2 * self.width
+    self.area:addGameObject("ShootEffect", self.x + 1.2 * self.width * math.cos(self.direction), self.y + 1.2 * self.width * math.sin(self.direction), {player = self, delta = delta})
 end
