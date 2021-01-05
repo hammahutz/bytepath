@@ -12,10 +12,20 @@ function Player:new(area, x, y, options)
     self.velocity = 0
     self.max_velocity = 1
     self.acceleration = 0.05
+
+
+    --Attack
+    self.attack_speed = 1
+    -- self.timer:every(5, function ()
+    --     self.attack_speed = random(1, 1)
+
+    --     local attack_rate = 0.24 / self.attack_speed
+
+    --     self.timer:every(attack_rate, function () self:shoot() end, 5 / attack_rate)
+
+    -- end)
+    self.timer:every(0.24, function () self:shoot() end)
     
-    self.timer:every(0.24, function ()
-        self:shoot()
-    end)
 end
 
 function Player:update(dt)
@@ -40,5 +50,6 @@ end
 
 function Player:shoot()
     local delta = 1.2 * self.width
-    self.area:addGameObject("ShootEffect", self.x + 1.2 * self.width * math.cos(self.direction), self.y + 1.2 * self.width * math.sin(self.direction), {player = self, delta = delta})
+    self.area:addGameObject("ShootEffect", self.x + delta * math.cos(self.direction), self.y + 1.2 * self.width * math.sin(self.direction), {player = self, delta = delta})
+    self.area:addGameObject("Projectile", self.x + delta * math.cos(self.direction), self.y + 1.5 * self.width * math.sin(self.direction), {direction = self.direction})
 end
