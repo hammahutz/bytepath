@@ -24,13 +24,13 @@ function Player:new(area, x, y, options)
     --     self.timer:every(attack_rate, function () self:shoot() end, 5 / attack_rate)
 
     -- end)
-    self.timer:every(0.24, function () self:shoot() end)
-    
+    self.timer:every(1, function () self:shoot() end)
+
 end
 
 function Player:update(dt)
     Player.super.update(self, dt)
-
+ 
     if input:down("left") then self.direction = self.direction - self.angle_velocity * dt end
     if input:down("right") then self.direction = self.direction + self.angle_velocity * dt end
 
@@ -40,6 +40,7 @@ function Player:update(dt)
     local y = self.velocity * math.sin(self.direction)
 
     self.collider:setLinearVelocity(x, y)
+    print(self.x)
 end
 
 function Player:draw()
@@ -49,7 +50,10 @@ function Player:draw()
 end
 
 function Player:shoot()
-    local delta = 1.2 * self.width
-    self.area:addGameObject("ShootEffect", self.x + delta * math.cos(self.direction), self.y + 1.2 * self.width * math.sin(self.direction), {player = self, delta = delta})
-    self.area:addGameObject("Projectile", self.x + delta * math.cos(self.direction), self.y + 1.5 * self.width * math.sin(self.direction), {direction = self.direction})
+    local delta = self.width * 1.2
+    local deltaX = self.x + delta * math.cos(self.direction)
+    local deltaY = self.y + delta * math.sin(self.direction)
+
+    self.area:addGameObject("ShootEffect", deltaX, deltaY, {player = self, delta = delta, deltaY = deltaY})
+    self.area:addGameObject("Projectile", deltaX, deltaY, {direction = self.direction})
 end
