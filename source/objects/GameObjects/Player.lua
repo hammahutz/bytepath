@@ -1,10 +1,10 @@
 Player = GameObject:extend()
 
 function Player:new(area, x, y, options)
-    Player.super:new(area, x, y, options)
+    Player.super.new(self, area, x, y, options)
 
     self.width = 25
-    self.collider = self.area.world:newCircleCollider(self.area, self.x, self.y, self, self.width)
+    self.collider = self.area.world:newCircleCollider(self.area, self.x, self.y, self.width)
 
     --Movement
     self.direction = 0
@@ -24,7 +24,7 @@ function Player:new(area, x, y, options)
     --     self.timer:every(attack_rate, function () self:shoot() end, 5 / attack_rate)
 
     -- end)
-    self.timer:every(1, function () self:shoot() end)
+    self.timer:every(3, function () self:shoot() end)
 
 end
 
@@ -33,19 +33,20 @@ function Player:update(dt)
  
     if input:down("left") then self.direction = self.direction - self.angle_velocity * dt end
     if input:down("right") then self.direction = self.direction + self.angle_velocity * dt end
+    if input:down("y") then self.collider:setLinearVelocity(3, 3) end
 
     self.velocity = math.min(self.velocity + self.acceleration * dt, self.max_velocity)
 
-    local x = self.velocity * math.cos(self.direction)
-    local y = self.velocity * math.sin(self.direction)
+    local delatX = self.velocity * math.cos(self.direction)
+    local deltaY = self.velocity * math.sin(self.direction)
 
-    self.collider:setLinearVelocity(x, y)
-    print(self.x)
+    self.collider:setLinearVelocity(delatX, deltaY)
 end
 
 function Player:draw()
-    Player.super:draw()
-    love.graphics.circle("line", self.x, self.y, self.width)
+    Player.super.draw(self)
+    love.graphics.setColor(255, 0, 0)
+    love.graphics.circle("line", self.x, self.y, self.width + 10)
     love.graphics.line(self.x, self.y, self.x + 20 * math.cos(self.direction), self.y + 20 * math.sin(self.direction))
 end
 
@@ -54,6 +55,6 @@ function Player:shoot()
     local deltaX = self.x + delta * math.cos(self.direction)
     local deltaY = self.y + delta * math.sin(self.direction)
 
-    self.area:addGameObject("ShootEffect", deltaX, deltaY, {player = self, delta = delta, deltaY = deltaY})
-    self.area:addGameObject("Projectile", deltaX, deltaY, {direction = self.direction})
+    self.area:addGameObject("ShootEffect", deltaX, deltaY, {player = self, delta = delta, deltaY = deltaY, name = "shoot effect"})
+    self.area:addGameObject("Projectile", deltaX, deltaY, {direction = self.direction, name = "projectile"})
 end

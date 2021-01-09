@@ -10,7 +10,13 @@ Camera = require "/libraries/STALKER-X/Camera"
 
 debug = true
 
+--if pcall(require, "lldebugger") then require("lldebugger").start() end  --Visual studio code
+--if pcall(require, "mobdebug") then require("mobdebug").start() end      --ZeroBrane Studio
+
 function love.load()
+  --Zerobrain debug
+  if arg[#arg] == "-debug" then require("mobdebug").start() end
+  
     setupGameWindow()
     Objects.load()
     timer = Timer()
@@ -21,7 +27,8 @@ function love.load()
     end)
     input:bind("left", "left")
     input:bind("right", "right")
-
+    input:bind("y", "y")
+  
     rooms = {}
     current_room = nil
     goToRoom("Stage", 0)
@@ -35,13 +42,9 @@ function love.load()
         for k, v in pairs(counts) do print(k, v) end
         print("-------------------------------------")
     end)
-
     input:bind('f2', function()
         goToRoom("Stage", 1)
     end)
-
-
-
 end
 
 function love.update(dt)

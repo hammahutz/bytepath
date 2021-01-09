@@ -15,7 +15,7 @@ function Stage:new()
     self.area = Area(self)
     self.area:addPhysicsWorld()
 
-    self.player = self.area:addGameObject("Player", game_screen_width / 2, game_screen_height / 2)
+    self.player = self.area:addGameObject("Player", game_screen_width / 2, game_screen_height / 2, {name = "player"})
     input:bind("f2", function() self.player.dead = true end)
 
     self.main_canvas = love.graphics.newCanvas(game_screen_width, game_screen_height)
@@ -24,7 +24,7 @@ end
 
 function Stage:update(dt)
     self.area:update(dt)
-    self.super:update(dt)
+    self.super.update(self, dt)
 end
 
 function Stage:draw()

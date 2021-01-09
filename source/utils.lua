@@ -60,3 +60,18 @@ function type_name(o)
     end
     return global_type_table[getmetatable(o) or 0] or "Unknown"
 end
+
+function pushRotate(x, y, rotate)
+    love.graphics.push()
+    love.graphics.translate(x, y)
+    love.graphics.rotate(rotate or 0)
+    love.graphics.translate(-x, -y)
+end
+
+function pushRotateScale(x, y, rotate, scaleX, scaleY)
+    love.graphics.push()
+    love.graphics.translate(x, y)
+    love.graphics.rotate(rotate or 0)
+    love.graphics.scale(scaleX or 1, scaleY or 1)
+    love.graphics.translate(-x, -y)
+end

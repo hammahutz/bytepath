@@ -29,5 +29,20 @@
             "script": "${workspaceFolder}/power-shell/build-and-run.ps1",
             "cwd": "${workspaceFolder}"
         },
+        {
+            "name": "Debug Love",
+            "type": "lua-local",
+            "request": "launch",
+            "program": {
+              "command": "love"
+            },
+            "args": [
+              "${workspaceFolder}/source"
+            ],
+            "stopOnEntry": true,
+            "scriptRoots": [
+              "${workspaceFolder}/source"
+            ]
+          }
     ]
 }

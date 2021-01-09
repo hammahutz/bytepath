@@ -1,7 +1,7 @@
 Physics = GameObject:extend()
 
 function Physics:new(area, x, y, options)
-    Physics.super:new(area, x, y, options)
+    Physics.super.new(self, area, x, y, options)
     self.colliders = {}
     return self
 end
@@ -19,13 +19,14 @@ end
 function Physics:draw()
     if self.colliders then
         for _, collider in ipairs(self.colliders) do
+            collider.draw(self)
             love.graphics.circle("line", collider.x, collider.y, collider.radius)
         end
     end
 end
 
-function Physics:newCircleCollider(area, x, y, attach, radius)
-    local collider = Collider:new(area, x, y, {attach = attach, circle = "Cicle", radius = radius})
+function Physics:newCircleCollider(area, x, y, radius)
+    local collider = Collider:new(area, x, y, {collider_type = "Cicle", radius = radius})
     table.insert(self.colliders, collider)
     return collider
 end
