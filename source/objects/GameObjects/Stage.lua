@@ -30,7 +30,7 @@ end
 function Stage:draw()
     drawToMainCanvas(self)
 
-    love.graphics.setColor(255, 255, 255, 255)
+    love.graphics.setColor(default_color)
     love.graphics.setBlendMode('alpha', 'premultiplied')
     love.graphics.draw(self.main_canvas, 0, 0, 0, game_screen_width_scale, game_screen_width_scale)
     love.graphics.setBlendMode('alpha')

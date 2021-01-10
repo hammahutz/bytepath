@@ -17,16 +17,17 @@ function Physics:update(dt)
 end
 
 function Physics:draw()
-    if self.colliders then
+    if self.colliders and debug then
+      love.graphics.setColor(255, 160, 0)
         for _, collider in ipairs(self.colliders) do
-            collider.draw(self)
-            love.graphics.circle("line", collider.x, collider.y, collider.radius)
+            collider:draw()
         end
+      love.graphics.setColor(default_color)
     end
 end
 
 function Physics:newCircleCollider(area, x, y, radius)
-    local collider = Collider:new(area, x, y, {collider_type = "Cicle", radius = radius})
+    local collider = Collider(self.area, x, y, {collider_type = "Circle", radius = radius})
     table.insert(self.colliders, collider)
     return collider
 end
@@ -42,7 +43,6 @@ function Physics:checkCollision(collider_a, collider_b)
     local katet_b = delta_y * delta_y
     local hypotenusa = (collider_a.radius + collider_b.radius) * (collider_a.radius + collider_b.radius)
 
-    print("Katet A: " .. katet_a .. " Katet B: " .. katet_b .." hypo: " .. hypotenusa)
 
     if (katet_a + katet_b) < hypotenusa then
         print("hit")

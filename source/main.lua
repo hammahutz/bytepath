@@ -1,3 +1,5 @@
+require "global"
+
 -- OOD classes/libraries
 Object = require "/libraries/classic/classic"
 require "/objects/Objects"
@@ -32,19 +34,22 @@ function love.load()
     rooms = {}
     current_room = nil
     goToRoom("Stage", 0)
-    --debug
-    input:bind('f1', function()
-        print("Before collection: " .. collectgarbage("count")/1024)
-        collectgarbage()
-        print("After collection: " .. collectgarbage("count")/1024)
-        print("Object count: ")
-        local counts = type_count()
-        for k, v in pairs(counts) do print(k, v) end
-        print("-------------------------------------")
-    end)
-    input:bind('f2', function()
-        goToRoom("Stage", 1)
-    end)
+    
+    
+    if debug then
+      input:bind('f1', function()
+          print("Before collection: " .. collectgarbage("count")/1024)
+          collectgarbage()
+          print("After collection: " .. collectgarbage("count")/1024)
+          print("Object count: ")
+          local counts = type_count()
+          for k, v in pairs(counts) do print(k, v) end
+          print("-------------------------------------")
+      end)
+      input:bind('f2', function()
+          goToRoom("Stage", 1)
+      end)
+  end
 end
 
 function love.update(dt)
@@ -94,6 +99,8 @@ function setupGameWindow()
 
     love.graphics.setDefaultFilter("nearest")
     love.graphics.setLineStyle("rough")
+    
+    love.graphics.setColor(default_color)
 
     game_screen_width = width / game_screen_resulution_denominator
     game_screen_height = height / game_screen_resulution_denominator

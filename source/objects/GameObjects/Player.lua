@@ -24,7 +24,7 @@ function Player:new(area, x, y, options)
     --     self.timer:every(attack_rate, function () self:shoot() end, 5 / attack_rate)
 
     -- end)
-    self.timer:every(3, function () self:shoot() end)
+    self.timer:every(0.2, function () self:shoot() end)
 
 end
 
@@ -45,8 +45,7 @@ end
 
 function Player:draw()
     Player.super.draw(self)
-    love.graphics.setColor(255, 0, 0)
-    love.graphics.circle("line", self.x, self.y, self.width + 10)
+    love.graphics.circle("line", self.x, self.y, self.width)
     love.graphics.line(self.x, self.y, self.x + 20 * math.cos(self.direction), self.y + 20 * math.sin(self.direction))
 end
 
