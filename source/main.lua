@@ -10,7 +10,7 @@ Lume = require "/libraries/lume/lume"
 Utils = require "/utils"
 Camera = require "/libraries/STALKER-X/Camera"
 
-debug = true
+debug = false
 
 --if pcall(require, "lldebugger") then require("lldebugger").start() end  --Visual studio code
 --if pcall(require, "mobdebug") then require("mobdebug").start() end      --ZeroBrane Studio
@@ -57,6 +57,7 @@ function love.update(dt)
         current_room:update(dt)
     end
     camera:update(dt)
+    local x, y = love.mouse.getPosition()
 end
 
 function love.draw()

@@ -44,7 +44,7 @@ function Physics:checkCollision(collider_a, collider_b)
     local hypotenusa = (collider_a.radius + collider_b.radius) * (collider_a.radius + collider_b.radius)
 
 
-    if (katet_a + katet_b) < hypotenusa then
+    if debug and (katet_a + katet_b) < hypotenusa then
         print("hit")
     end
 end

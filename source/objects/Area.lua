@@ -35,7 +35,7 @@ function Area:addGameObject(game_object_type, x, y, options)
     local game_object = _G[game_object_type](self, x or 0, y or 0, options)
     table.insert(self.game_objects, game_object)
     
-    print("Name: " .. game_object.name .. " ID: " .. game_object.id)
+    if debug then print("Name: " .. game_object.name .. " ID: " .. game_object.id) end
     
     return game_object
 end

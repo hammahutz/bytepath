@@ -1,17 +1,17 @@
-GameObjectTemplate = GameObject:extend()
+ProjectileDeathEffect = GameObject:extend()
 
-function GameObjectTemplate:new(area, x, y, opts)
-    GameObjectTemplate.super.new(self, area, x, y, opts)
+function ProjectileDeathEffect:new(area, x, y, opts)
+    ProjectileDeathEffect.super.new(self, area, x, y, opts)
 end
 
-function GameObjectTemplate:update(dt)
-    GameObjectTemplate.super.update(self, dt)
+function ProjectileDeathEffect:update(dt)
+    ProjectileDeathEffect.super.update(self, dt)
 end
 
-function GameObjectTemplate:draw()
+function ProjectileDeathEffect:draw()
 
 end
 
-function GameObjectTemplate:destroy()
-    GameObjectTemplate.super.destroy(self)
+function ProjectileDeathEffect:destroy()
+    ProjectileDeathEffect.super.destroy(self)
 end
