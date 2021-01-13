@@ -57,9 +57,9 @@ function Player:shoot()
     self.area:addGameObject("ShootEffect", deltaX, deltaY, {player = self, delta = delta, deltaY = deltaY, name = "shoot effect"})
     self.area:addGameObject("Projectile", deltaX, deltaY, {direction = self.direction, name = "projectile", radius = 5, velocity = 2})
 
-    local offsetX = 8 * math.sin(self.direction)
-    local offsetY = 8 * math.cos(self.direction) 
+    -- local offsetX = 8 * math.sin(self.direction)
+    -- local offsetY = 8 * math.cos(self.direction) 
 
-    self.area:addGameObject("Projectile", deltaX - offsetX, deltaY + offsetY, {direction = self.direction, name = "projectile", radius = 5, velocity = 2})
-    self.area:addGameObject("Projectile", deltaX + offsetX, deltaY - offsetY, {direction = self.direction, name = "projectile", radius = 5, velocity = 2})
+    -- self.area:addGameObject("Projectile", deltaX - offsetX, deltaY + offsetY, {direction = self.direction, name = "projectile", radius = 5, velocity = 2})
+    -- self.area:addGameObject("Projectile", deltaX + offsetX, deltaY - offsetY, {direction = self.direction, name = "projectile", radius = 5, velocity = 2})
 end
