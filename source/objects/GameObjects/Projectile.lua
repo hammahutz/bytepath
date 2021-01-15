@@ -23,6 +23,7 @@ function Projectile:update(dt)
 end
 
 function Projectile:draw()
+    love.graphics.setColor(default_color)
     love.graphics.circle("line", self.x, self.y, self.radius)
 end
 
@@ -32,5 +33,5 @@ end
 
 function Projectile:die()
     self.dead = true
-    self.area:addGameObject("ProjectileDeathEffect", self.x, self.y, {color = health_point_color, width = 3 * self.radius})
+    self.area:addGameObject("ProjectileDeathEffect", self.x, self.y, {color = boost_color, width = 3 * self.radius})
 end

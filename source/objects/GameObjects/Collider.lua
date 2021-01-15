@@ -11,7 +11,7 @@ end
 
 function Collider:draw()
   if self.collider_type == "Circle" then
-    love.graphics.circle("line", self.x, self.y, self.radius) 
+    love.graphics.circle("line", self.x, self.y, self.radius)
   end
 end
 

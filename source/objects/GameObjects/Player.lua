@@ -24,7 +24,7 @@ function Player:new(area, x, y, options)
     --     self.timer:every(attack_rate, function () self:shoot() end, 5 / attack_rate)
 
     -- end)
-    self.timer:every(0.2, function () self:shoot() end)
+    self.timer:every(1.0, function () self:shoot() end)
 
 end
 
@@ -45,6 +45,7 @@ end
 
 function Player:draw()
     Player.super.draw(self)
+    love.graphics.setColor(default_color)
     love.graphics.circle("line", self.x, self.y, self.width)
     love.graphics.line(self.x, self.y, self.x + 20 * math.cos(self.direction), self.y + 20 * math.sin(self.direction))
 end
@@ -55,7 +56,7 @@ function Player:shoot()
     local deltaY = self.y + delta * math.sin(self.direction)
 
     self.area:addGameObject("ShootEffect", deltaX, deltaY, {player = self, delta = delta, deltaY = deltaY, name = "shoot effect"})
-    self.area:addGameObject("Projectile", deltaX, deltaY, {direction = self.direction, name = "projectile", radius = 5, velocity = 2})
+    self.area:addGameObject("Projectile", deltaX, deltaY, {direction = self.direction, name = "projectile", radius = 5, velocity = 6})
 
     -- local offsetX = 8 * math.sin(self.direction)
     -- local offsetY = 8 * math.cos(self.direction) 
