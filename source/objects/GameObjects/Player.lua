@@ -3,15 +3,15 @@ Player = GameObject:extend()
 function Player:new(area, x, y, options)
     Player.super.new(self, area, x, y, options)
 
-    self.width = 25
+    self.width = 12
     self.collider = self.area.world:newCircleCollider(self.area, self.x, self.y, self.width)
 
     --Movement
     self.direction = 0
     self.angle_velocity = 1.66 * math.pi
     self.velocity = 0
-    self.max_velocity = 1
-    self.acceleration = 0.05
+    self.max_velocity = 50
+    self.acceleration = 40
 
 
     --Attack
@@ -24,7 +24,9 @@ function Player:new(area, x, y, options)
     --     self.timer:every(attack_rate, function () self:shoot() end, 5 / attack_rate)
 
     -- end)
-    self.timer:every(1.0, function () self:shoot() end)
+    self.timer:every(0.24, function () self:shoot() end)
+
+    input:bind("f4", function() self:die() end)
 
 end
 
@@ -37,8 +39,8 @@ function Player:update(dt)
 
     self.velocity = math.min(self.velocity + self.acceleration * dt, self.max_velocity)
 
-    local delatX = self.velocity * math.cos(self.direction)
-    local deltaY = self.velocity * math.sin(self.direction)
+    local delatX = self.velocity * math.cos(self.direction) * dt
+    local deltaY = self.velocity * math.sin(self.direction) * dt
 
     self.collider:setLinearVelocity(delatX, deltaY)
 end
@@ -55,12 +57,13 @@ function Player:shoot()
     local deltaX = self.x + delta * math.cos(self.direction)
     local deltaY = self.y + delta * math.sin(self.direction)
 
-    self.area:addGameObject("ShootEffect", deltaX, deltaY, {player = self, delta = delta, deltaY = deltaY, name = "shoot effect"})
-    self.area:addGameObject("Projectile", deltaX, deltaY, {direction = self.direction, name = "projectile", radius = 5, velocity = 6})
+    self.area:addGameObject("ShootEffect", deltaX, deltaY, {player = self, delta = delta, deltaY = deltaY})
+    self.area:addGameObject("Projectile", deltaX, deltaY, {direction = self.direction, radius = 5, velocity = 200 + self.velocity})
+end
 
-    -- local offsetX = 8 * math.sin(self.direction)
-    -- local offsetY = 8 * math.cos(self.direction) 
-
-    -- self.area:addGameObject("Projectile", deltaX - offsetX, deltaY + offsetY, {direction = self.direction, name = "projectile", radius = 5, velocity = 2})
-    -- self.area:addGameObject("Projectile", deltaX + offsetX, deltaY - offsetY, {direction = self.direction, name = "projectile", radius = 5, velocity = 2})
+function Player:die()
+    self.dead = true
+    for i = 1, love.math.random(8, 12) do
+        self.area:addGameObject("ExplodeParticle", self.x, self.y)
+    end
 end

@@ -4,10 +4,10 @@ function ProjectileDeathEffect:new(area, x, y, opts)
     ProjectileDeathEffect.super.new(self, area, x, y, opts)
 
     self.first = true
-    self.timer:after(1, function ()
+    self.timer:after(0.1, function ()
         self.first = false
         self.second = true
-        self.timer:after(1, function ()
+        self.timer:after(0.15, function ()
             self.second = false
             self.dead = true
         end)

@@ -10,9 +10,9 @@ function Collider:update(dt)
 end
 
 function Collider:draw()
-  if self.collider_type == "Circle" then
-    love.graphics.circle("line", self.x, self.y, self.radius)
-  end
+  -- if self.collider_type == "Circle" then
+  --   love.graphics.circle("line", self.x, self.y, self.radius)
+  -- end
 end
 
 function Collider:setLinearVelocity(x, y)
