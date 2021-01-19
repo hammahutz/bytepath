@@ -8,3 +8,5 @@ boost_color = {0.945, 0.404, 0.271, 1}
 health_point_color = {0.945, 0.404, 0.271, 1}
 skill_point_color = {1.000, 0.776, 0.365, 1}
 --#endregion Color
+
+default_linewidth = 1
