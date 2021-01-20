@@ -33,8 +33,6 @@ function love.load()
     current_room = nil
     goToRoom("Stage", 0)
 
-
-    input:bind("f3", function() camera:shake(200, 1, 200) end)
     input:bind("left", "left")
     input:bind("right", "right")
     input:bind("y", "y")
@@ -51,6 +49,7 @@ function love.load()
         end)
 
         input:bind('f2', function() goToRoom("Stage", 1) end)
+        input:bind("f3", function() camera:shake(200, 1, 200) end)
     end
 
 
@@ -89,24 +88,8 @@ function addRoom(room_type, room_name, ...)
 end
 
 function goToRoom(room_type, room_name, ...)
-
     if current_room and current_room.destroy then current_room:destroy() end
     current_room = _G[room_type](...)
-
-    -- if current_room and rooms[room_name] then
-
-    --     if current_room.deactivate then
-    --         current_room:deactivate()
-    --     end
-
-    --     current_room = rooms[room_name]
-
-    --     if current_room.activate then
-    --         current_room:activate()
-    --     end
-    -- else
-    --     current_room = addRoom(room_type, room_name, ...)
-    -- end
 end
 
 function setupGameWindow()

@@ -28,6 +28,8 @@ function Player:new(area, x, y, options)
 
     input:bind("f4", function() self:die() end)
 
+    self.timer:every(5, function() self:tick() end)
+
 end
 
 function Player:update(dt)
@@ -43,6 +45,11 @@ function Player:update(dt)
     local deltaY = self.velocity * math.sin(self.direction) * dt
 
     self.collider:setLinearVelocity(delatX, deltaY)
+
+    if self.x < 0 then self:die() end
+    if self.y < 0 then self:die() end
+    if self.x > game_screen_width then self:die() end
+    if self.y > game_screen_height then self:die() end
 end
 
 function Player:draw()
@@ -70,5 +77,8 @@ function Player:die()
     for i = 1, love.math.random(8, 12) do
         self.area:addGameObject("ExplodeParticle", self.x, self.y)
     end
+end
 
+function Player:tick()
+    self.area:addGameObject("TickEffect", self.x, self.y, {parent = self})
 end

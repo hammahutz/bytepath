@@ -9,6 +9,7 @@ local function drawToMainCanvas(self)
 
     camera:detach()
     love.graphics.setCanvas()
+
 end
 
 function Stage:new()
@@ -20,6 +21,7 @@ function Stage:new()
 
     self.main_canvas = love.graphics.newCanvas(game_screen_width, game_screen_height)
 
+    self.area:addGameObject("Debug", 0, 0)
 end
 
 function Stage:update(dt)

@@ -1,17 +1,17 @@
--- ProjectileDeathEffect = GameObject:extend()
+-- temp = GameObject:extend()
 
--- function ProjectileDeathEffect:new(area, x, y, opts)
---     ProjectileDeathEffect.super.new(self, area, x, y, opts)
+-- function temp:new(area, x, y, opts)
+--     temp.super.new(self, area, x, y, opts)
 -- end
 
--- function ProjectileDeathEffect:update(dt)
---     ProjectileDeathEffect.super.update(self, dt)
+-- function temp:update(dt)
+--     temp.super.update(self, dt)
 -- end
 
--- function ProjectileDeathEffect:draw()
+-- function temp:draw()
 
 -- end
 
--- function ProjectileDeathEffect:destroy()
---     ProjectileDeathEffect.super.destroy(self)
+-- function temp:destroy()
+--     temp.super.destroy(self)
 -- end
