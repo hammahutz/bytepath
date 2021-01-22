@@ -29,13 +29,16 @@ function love.load()
     camera = Camera()
     time_slow_amount = 1 --Timeslow for both timer, camera and room
 
+    fn = Moses()
+
     rooms = {}
     current_room = nil
     goToRoom("Stage", 0)
 
     input:bind("left", "left")
     input:bind("right", "right")
-    input:bind("y", "y")
+    input:bind("up", "up")
+    input:bind("down", "down")
 
     if debug then
         input:bind('f1', function()
@@ -47,12 +50,7 @@ function love.load()
             for k, v in pairs(counts) do print(k, v) end
             print("-------------------------------------")
         end)
-
-        input:bind('f2', function() goToRoom("Stage", 1) end)
-        input:bind("f3", function() camera:shake(200, 1, 200) end)
     end
-
-
 end
 
 function love.update(dt)

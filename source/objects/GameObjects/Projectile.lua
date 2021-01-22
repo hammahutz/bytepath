@@ -33,5 +33,5 @@ end
 
 function Projectile:die()
     self.dead = true
-    self.area:addGameObject("ProjectileDeathEffect", self.x, self.y, {color = boost_color, width = 3 * self.radius})
+    self.area:addGameObject("ProjectileDeathEffect", self.x, self.y, {color = slow_color, width = 3 * self.radius})
 end
