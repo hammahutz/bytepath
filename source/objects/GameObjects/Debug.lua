@@ -6,6 +6,16 @@ function Debug:new(area, x, y, opts)
     self.game_time = 0
     self.display_time = 0
     self.fps = 0
+
+    input:bind('f1', function()
+        print("Before collection: " .. collectgarbage("count")/1024)
+        collectgarbage()
+        print("After collection: " .. collectgarbage("count")/1024)
+        print("Object count: ")
+        local counts = type_count()
+        for k, v in pairs(counts) do print(k, v) end
+        print("-------------------------------------")
+    end)
 end
 
 function Debug:update(dt)

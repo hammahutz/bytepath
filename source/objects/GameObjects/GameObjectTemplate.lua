@@ -1,17 +1,17 @@
--- temp = GameObject:extend()
+-- ö = GameObject:extend()
 
--- function temp:new(area, x, y, opts)
---     temp.super.new(self, area, x, y, opts)
+-- function ö:new(area, x, y, opts)
+--     ö.super.new(self, area, x, y, opts)
 -- end
 
--- function temp:update(dt)
---     temp.super.update(self, dt)
+-- function ö:update(dt)
+--     ö.super.update(self, dt)
 -- end
 
--- function temp:draw()
+-- function ö:draw()
 
 -- end
 
--- function temp:destroy()
---     temp.super.destroy(self)
+-- function ö:destroy()
+--     ö.super.destroy(self)
 -- end

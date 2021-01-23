@@ -39,18 +39,6 @@ function love.load()
     input:bind("right", "right")
     input:bind("up", "up")
     input:bind("down", "down")
-
-    if debug then
-        input:bind('f1', function()
-            print("Before collection: " .. collectgarbage("count")/1024)
-            collectgarbage()
-            print("After collection: " .. collectgarbage("count")/1024)
-            print("Object count: ")
-            local counts = type_count()
-            for k, v in pairs(counts) do print(k, v) end
-            print("-------------------------------------")
-        end)
-    end
 end
 
 function love.update(dt)

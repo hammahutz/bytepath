@@ -26,39 +26,8 @@ function Player:new(area, x, y, options)
     self.timer:every(0.24, function () self:shoot() end)
     self.timer:every(5, function() self:tick() end)
 
-    self.ship = "Fighter"
-    self.polygons = {}
-    if self.ship == "Fighter" then
-
-        self.polygons[1] = {
-            self.width, 0, -- 1
-            self.width/2, -self.width/2, -- 2
-            -self.width/2, -self.width/2, -- 3
-             -self.width, 0, -- 4
-             -self.width/2, self.width/2, -- 5
-             self.width/2, self.width/2, -- 6
-        }
-        
-         self.polygons[2] = {
-             self.width/2, -self.width/2, -- 7
-             0, -self.width, -- 8
-             -self.width - self.width/2, -self.width, -- 9
-             -3*self.width/4, -self.width/4, -- 10
-             -self.width/2, -self.width/2, -- 11
-         }
-        
-         self.polygons[3] = {
-             self.width/2, self.width/2, -- 12
-             -self.width/2, self.width/2, -- 13
-             -3*self.width/4, self.width/4, -- 14
-             -self.width - self.width/2, self.width, -- 15
-             0, self.width, -- 16
-         }
-
-
-         self.timer:every(0.01, function () self:add_trail(0.9, 0.2) end)
-         self.timer:every(0.01, function () self:add_trail(0.9, -0.2) end)
-    end
+    self.ship_name = "Fighter"
+    self.ship_visuals = Ship(self.ship_name, self)
 end
 
 function Player:update(dt)
@@ -81,8 +50,6 @@ function Player:update(dt)
         self.max_velocity = self.base_max_velocity * 0.5
     end
 
-
-
     self.velocity = math.min(self.velocity + self.acceleration * dt, self.max_velocity)
     local delatX = self.velocity * math.cos(self.direction) * dt
     local deltaY = self.velocity * math.sin(self.direction) * dt
@@ -96,23 +63,13 @@ end
 
 function Player:draw()
     Player.super.draw(self)
-    pushRotate(self.x, self.y, self.direction)
-    love.graphics.setColor(default_color)
-    for _, polygon in ipairs(self.polygons) do
-        local points = fn.map(polygon, function(v, k)
-        	if k % 2 == 1 then 
-          		return self.x + v + random(-1, 1)
-        	else 
-          		return self.y + v + random(-1, 1)
-        	end 
-      	end)
-        love.graphics.polygon('line', points)
-    end
-    love.graphics.pop()
+    self.ship_visuals:draw()
+    love.graphics.setColor(0.1, 0.1, 0.1, 1)
+    love.graphics.circle("line", self.x, self.y, self.width)
 end
 
 function Player:shoot()
-    local delta = self.width * 1.2
+    local delta = self.gun_pos or self.width * 1.2
     local deltaX = self.x + delta * math.cos(self.direction)
     local deltaY = self.y + delta * math.sin(self.direction)
 
@@ -142,4 +99,10 @@ function Player:die()
     for i = 1, love.math.random(8, 12) do
         self.area:addGameObject("ExplodeParticle", self.x, self.y)
     end
+end
+
+function Player:destroy()
+    self.ship_visuals:destroy()
+    self.ship_visuals = nil
+    self.super.destroy(self)
 end
