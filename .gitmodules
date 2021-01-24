@@ -25,3 +25,6 @@
 [submodule "source/libraries/EnhancedTimer"]
 	path = source/libraries/EnhancedTimer
 	url = https://github.com/a327ex/EnhancedTimer.git
+[submodule "source/libraries/draft"]
+	path = source/libraries/draft
+	url = https://github.com/pelevesque/draft.git

@@ -3,6 +3,8 @@ TickEffect = GameObject:extend()
 function TickEffect:new(area, x, y, opts)
     TickEffect.super.new(self, area, x, y, opts)
 
+    self.depth = 75
+
     self.width, self.height = self.parent.width * 3 or 48, self.parent.width * 2 or 32
     self.y_offset = 0
 

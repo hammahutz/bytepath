@@ -11,7 +11,14 @@ function Area:update(dt)
 end
 
 function Area:draw()
-    if self.world then self.world:draw() end
+    table.sort(self.game_objects, 
+        function (a, b)
+            if a.depth == b.depth then return a.creation_time < b.creation_time
+            else return a.depth < b.depth end
+        end
+    )
+
+    if self.world then self.world:draw() end 
     for _, game_object in ipairs(self.game_objects) do game_object:draw() end
 end
 
@@ -30,6 +37,12 @@ function Area:updateGameObjects(dt)
     end
 end
 
+---Add a gameobject to the Area
+---@param game_object_type string The type of gameobjetct to spawn
+---@param x number Position x
+---@param y number Position y
+---@param options table Table of options to be passed into the gameobject
+---@return table Gameobject Return the gameobject
 function Area:addGameObject(game_object_type, x, y, options)
     local options = options or {}
     local game_object = _G[game_object_type](self, x or 0, y or 0, options)

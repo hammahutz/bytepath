@@ -1,8 +1,13 @@
 Collider = GameObject:extend()
 
 function Collider:new(area, x, y, option)
-    Collider.super.new(self, area, x, y, option)
-    return self
+  Collider.super.new(self, area, x, y, option)
+
+  self.delta_x = 0
+  self.delta_y =  0
+  self.angular_speed = 0
+
+  return self
 end
 
 function Collider:update(dt)
@@ -26,4 +31,8 @@ end
 
 function Collider:destroy()
     self = nil
+end
+
+function Collider:setAngularImpulse(angular_speed)
+  pushRotate(self.x, self.y, angular_speed)
 end

@@ -14,6 +14,8 @@ function GameObject:new(area, x, y, options)
     self.id = UUID()
     self.dead = false
     self.timer = Timer()
+    self.depth = 50
+    self.creation_time = 1
 end
 
 function GameObject:update(dt)

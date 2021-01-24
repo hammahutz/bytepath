@@ -10,6 +10,8 @@ Moses = require "/libraries/Moses/moses"
 Lume = require "/libraries/lume/lume"
 Utils = require "/utils"
 Camera = require "/libraries/STALKER-X/Camera"
+Draft = require "/libraries/draft/draft"
+
 
 debug = false
 
@@ -24,21 +26,21 @@ function love.load()
     Objects.load()
 
     input = Input()
-
+    fn = Moses()
     timer = Timer()
     camera = Camera()
-    time_slow_amount = 1 --Timeslow for both timer, camera and room
-
-    fn = Moses()
-
+    draft = Draft()
+    
     rooms = {}
     current_room = nil
     goToRoom("Stage", 0)
+    time_slow_amount = 1 --Timeslow for both timer, camera and room
 
     input:bind("left", "left")
     input:bind("right", "right")
     input:bind("up", "up")
     input:bind("down", "down")
+    input:bind("p", "p")
 end
 
 function love.update(dt)

@@ -19,6 +19,20 @@ function Player:new(area, x, y, options)
 
     self.acceleration = 100
 
+    self.max_boost = 100
+    self.boost = self.max_boost
+    self.can_boost = true
+    self.booster_timer = 0
+    self.booster_cooldown = 2
+
+    --Health Points
+    self.max_hp = 100
+    self.hp = self.max_hp
+
+    --Ammonition
+    self.ammo = 100
+    self.ammo = self.ammo
+
     --Attack
     self.attack_speed = 1
 
@@ -37,17 +51,30 @@ function Player:update(dt)
     if input:down("right") then self.direction = self.direction + self.angle_velocity * dt end
 
     self.max_velocity = self.base_max_velocity
-    self.boosting = false
     self.trail_color = skill_point_color
-    if input:down("up") then
+
+    self.boost = math.min(self.boost + 10 * dt, self.max_boost)
+    self.booster_timer = self.booster_timer + dt
+    if self.booster_timer > self.booster_cooldown then self.can_boost = true end
+    self.boosting = false
+
+    if input:down("up") and self.boost > 1 and self.can_boost then
         self.boosting = true
+        self.boost = self.boost - 50 * dt
         self.trail_color = boost_color
         self.max_velocity = self.base_max_velocity * 1.5
     end
     if input:down("down") then
         self.boosting = true
+        self.boost =  self.boost - 50 * dt
         self.trail_color = slow_color
         self.max_velocity = self.base_max_velocity * 0.5
+    end
+
+    if self.boost <= 1 then
+        self.boosting = false
+        self.can_boost = false
+        self.boost_timer = 0
     end
 
     self.velocity = math.min(self.velocity + self.acceleration * dt, self.max_velocity)

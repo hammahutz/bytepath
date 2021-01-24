@@ -10,6 +10,10 @@ local function drawToMainCanvas(self)
     camera:detach()
     love.graphics.setCanvas()
 
+    input:bind("p", function ()
+        self.area:addGameObject("Ammo", random(0, game_screen_width), random(0, game_screen_height))
+    end)
+
 end
 
 function Stage:new()
