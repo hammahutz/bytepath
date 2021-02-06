@@ -80,7 +80,7 @@ function Player:update(dt)
     self.velocity = math.min(self.velocity + self.acceleration * dt, self.max_velocity)
     local delatX = self.velocity * math.cos(self.direction) * dt
     local deltaY = self.velocity * math.sin(self.direction) * dt
-    self.collider:setLinearVelocity(delatX, deltaY)
+    self.collider:setConstantLinearVelocity(delatX, deltaY)
 
     if self.x < 0 then self:die() end
     if self.y < 0 then self:die() end

@@ -3,11 +3,13 @@ Physics = GameObject:extend()
 function Physics:new(area, x, y, options)
     Physics.super.new(self, area, x, y, options)
     self.colliders = {}
+    self.classes = {}
     return self
 end
 
 function Physics:update(dt)
     for _, collider_a in ipairs(self.colliders) do
+        collider_a:update(dt)
         for _, collider_b in ipairs(self.colliders) do
             if collider_a ~= collider_b then
                 Physics:checkCollision(collider_a, collider_b)
@@ -53,4 +55,12 @@ function Physics:destroy()
     for _, collider in ipairs(self.colliders) do
         collider = nil
     end
+end
+
+
+---Adds a addCollisionClass
+---@param class_name string Name of the class
+---@param ignores table Claseses to be ignore
+function Physics:addCollisionClass(class_name, ignores)
+    table.insert(self.classes, {class = class_name, ignores = ignores})
 end
