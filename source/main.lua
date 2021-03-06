@@ -11,6 +11,7 @@ Lume = require "/libraries/lume/lume"
 Utils = require "/utils"
 Camera = require "/libraries/STALKER-X/Camera"
 Draft = require "/libraries/draft/draft"
+Lurker = require "/libraries/lurker/lurker"
 
 
 debug = false
@@ -21,7 +22,7 @@ debug = false
 function love.load()
   --Zerobrain debug
   if arg[#arg] == "-debug" then require("mobdebug").start() end
-  
+
     setupGameWindow()
     Objects.load()
 
@@ -30,7 +31,7 @@ function love.load()
     timer = Timer()
     camera = Camera()
     draft = Draft()
-    
+
     rooms = {}
     current_room = nil
     goToRoom("Stage", 0)
@@ -86,7 +87,7 @@ function setupGameWindow()
 
     love.graphics.setDefaultFilter("nearest")
     love.graphics.setLineStyle("rough")
-    
+
     love.graphics.setColor(default_color)
 
     game_screen_width = width / game_screen_resulution_denominator
@@ -111,4 +112,3 @@ end
 function screen_flash(frames)
     flash_frames = frames
 end
-

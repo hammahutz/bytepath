@@ -46,7 +46,7 @@ end
 
 function Player:update(dt)
     Player.super.update(self, dt)
- 
+
     if input:down("left") then self.direction = self.direction - self.angle_velocity * dt end
     if input:down("right") then self.direction = self.direction + self.angle_velocity * dt end
 

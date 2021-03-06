@@ -28,3 +28,6 @@
 [submodule "source/libraries/draft"]
 	path = source/libraries/draft
 	url = https://github.com/pelevesque/draft.git
+[submodule "source/libraries/lurker"]
+	path = source/libraries/lurker
+	url = https://github.com/rxi/lurker.git
