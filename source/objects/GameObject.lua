@@ -29,7 +29,7 @@ end
 
 function GameObject:destroy()
     self.timer = nil
-    if self.collider then self.collider.destroy() end
+    if self.collider then self.collider.dead = true end
     self.collider = nil
     self = nil
 end

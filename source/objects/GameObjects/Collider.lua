@@ -4,8 +4,11 @@ function Collider:new(area, x, y, option)
   Collider.super.new(self, area, x, y, option)
 
   self.delta_x = 0
-  self.delta_y =  0
+  self.delta_y = 0
   self.angular_speed = 0
+
+  self.collider_class = {}
+
 
   return self
 end
@@ -17,9 +20,10 @@ function Collider:update(dt)
 end
 
 function Collider:draw()
-  -- if self.collider_type == "Circle" then
-  --   love.graphics.circle("line", self.x, self.y, self.radius)
-  -- end
+
+     love.graphics.setColor(1,0,0,0.3)
+     love.graphics.circle("fill", self.x, self.y, self.radius)
+
 end
 
 function Collider:setLinearVelocity(x, y)
@@ -33,13 +37,18 @@ function Collider:setConstantLinearVelocity(delta_x, delta_y)
 end
 
 function Collider:getPosition()
-    return self.x, self.y
+  return self.x, self.y
 end
 
-function Collider:destroy()
-    self = nil
-end
+-- function Collider:destroy()
+--   self = nil
+-- end
 
 function Collider:setAngularImpulse(angular_speed)
   pushRotate(self.x, self.y, angular_speed)
+end
+
+function Collider:setColliderClass(collider_class, ignores)
+  self.collider_class.name = collider_class
+  self.collider_class.ignores = ignores
 end

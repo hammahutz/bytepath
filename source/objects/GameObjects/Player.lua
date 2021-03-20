@@ -7,6 +7,7 @@ function Player:new(area, x, y, options)
 
     self.width = 12
     self.collider = self.area.world:newCircleCollider(self.area, self.x, self.y, self.width)
+    self.collider:setColliderClass("Player")
     self.trail_color = skill_point_color
 
     --Movement
@@ -96,7 +97,7 @@ function Player:draw()
 end
 
 function Player:shoot()
-    local delta = self.gun_pos or self.width * 1.2
+    local delta = self.width * 5
     local deltaX = self.x + delta * math.cos(self.direction)
     local deltaY = self.y + delta * math.sin(self.direction)
 

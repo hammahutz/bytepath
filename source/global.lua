@@ -11,3 +11,4 @@ skill_point_color = {1.000, 0.776, 0.365, 1}
 --#endregion Color
 
 default_linewidth = 1
+

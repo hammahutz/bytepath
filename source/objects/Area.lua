@@ -20,6 +20,7 @@ function Area:draw()
 
     if self.world then self.world:draw() end 
     for _, game_object in ipairs(self.game_objects) do game_object:draw() end
+    self.world:draw()
 end
 
 function Area:updatePhysics(dt)
@@ -30,19 +31,14 @@ function Area:updateGameObjects(dt)
     for i = #self.game_objects, 1, -1 do
         local game_object = self.game_objects[i]
         game_object:update(dt)
-        if game_object.dead then 
-            game_object:destroy()
-            table.remove(self.game_objects, i)
+        if game_object.dead then
+          if game_object.collider then game_object.collider.dead = true end
+          game_object:destroy()
+          table.remove(self.game_objects, i)
         end
     end
 end
 
----Add a gameobject to the Area
----@param game_object_type string The type of gameobjetct to spawn
----@param x number Position x
----@param y number Position y
----@param options table Table of options to be passed into the gameobject
----@return table Gameobject Return the gameobject
 function Area:addGameObject(game_object_type, x, y, options)
     local options = options or {}
     local game_object = _G[game_object_type](self, x or 0, y or 0, options)

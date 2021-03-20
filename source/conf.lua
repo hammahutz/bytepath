@@ -12,5 +12,5 @@ function love.conf(t)
     t.window.height = game_screen_height / game_screen_resulution_denominator
     t.window.resizable = true
     t.window.fullscreentype = "exclusive"
-    t.window.display = 1
+    t.window.display = 3
 end

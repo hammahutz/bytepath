@@ -7,6 +7,7 @@ function Projectile:new(area, x, y, opts)
     self.velocity = opts.velocity or 200
 
     self.collider = self.area.world:newCircleCollider(self.area, self.x, self.y, self.radius)
+    self.collider:setColliderClass("Projectile", "Projectile")
     -- self.collider:setObjecet(self)
     -- self.collider:setLinearVelocity(self.velocity * math.cos(self.direction), self.velocity * math.sin(self.direction))
 
@@ -28,10 +29,11 @@ function Projectile:draw()
 end
 
 function Projectile:destroy()
-    Projectile.super.destroy(self)
+    Projectile.super:destroy()
 end
 
 function Projectile:die()
     self.dead = true
     self.area:addGameObject("ProjectileDeathEffect", self.x, self.y, {color = slow_color, width = 3 * self.radius})
+    -- self.collider.dead = true
 end

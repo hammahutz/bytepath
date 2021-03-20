@@ -1,5 +1,23 @@
 Physics = GameObject:extend()
 
+
+
+local function checkIgnores(collider_a, collider_b)
+    if (type(collider_a.collider_class.ignores) == "table") then
+        for _, ignore in ipairs(collider_a.collider_class.ignores) do
+            if ignore == collider_b.collider_class.name then
+                do return end
+            end
+        end
+    elseif (type(collider_a.collider_class.ignores) ~= "nil") then
+        if collider_a.collider_class.ignores == collider_b.collider_class.name then
+            do return end
+        end
+    end
+end
+
+
+
 function Physics:new(area, x, y, options)
     Physics.super.new(self, area, x, y, options)
     self.colliders = {}
@@ -8,21 +26,29 @@ function Physics:new(area, x, y, options)
 end
 
 function Physics:update(dt)
-    for _, collider_a in ipairs(self.colliders) do
+    for i = #self.colliders, 1, -1 do
+        local collider_a = self.colliders[i]
+
         collider_a:update(dt)
+
         for _, collider_b in ipairs(self.colliders) do
-            if collider_a ~= collider_b then
+            if collider_a.id ~= collider_b.id then
                 Physics:checkCollision(collider_a, collider_b)
             end
         end
+
+        if collider_a.dead then 
+            table.remove(self.colliders, i)
+        end
+
     end
 end
 
 function Physics:draw()
-    if self.colliders and debug then
-      love.graphics.setColor(255, 160, 0)
+    if self.colliders  then
+      love.graphics.setColor(1, 1, 0)
         for _, collider in ipairs(self.colliders) do
-            collider:draw()
+            collider:draw(z)
         end
       love.graphics.setColor(default_color)
     end
@@ -35,6 +61,9 @@ function Physics:newCircleCollider(area, x, y, radius)
 end
 
 function Physics:checkCollision(collider_a, collider_b)
+    checkIgnores(collider_a, collider_b)
+    
+
     local delta_x, delta_y
 
     delta_x = math.abs(collider_a.x - collider_b.x)
@@ -46,8 +75,8 @@ function Physics:checkCollision(collider_a, collider_b)
     local hypotenusa = (collider_a.radius + collider_b.radius) * (collider_a.radius + collider_b.radius)
 
 
-    if debug and (katet_a + katet_b) < hypotenusa then
-        print("hit")
+    if (katet_a + katet_b) < hypotenusa then
+        print(collider_a.collider_class.name .. " " .. collider_b.collider_class.name)
     end
 end
 

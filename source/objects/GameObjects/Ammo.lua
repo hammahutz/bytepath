@@ -4,11 +4,13 @@ function Ammo:new(area, x, y, opts)
     Ammo.super.new(self, area, x, y, opts)
 
     self.width, self.height =  8, 8
-    self.collider = self.area.world:newCircleCollider(self.area, self.x, self.y, self.width)
     self.direction = random(0, 2 * math.pi)
     self.velocity = random(5, 40)
     self.angular_speed =  random(-10, 10)
     self.angle = 0
+
+    self.collider = self.area.world:newCircleCollider(self.area, self.x, self.y, self.width)
+    self.collider:setColliderClass("Collectable", {"Collectable", "Projectile"})
 end
 
 function Ammo:update(dt)
@@ -27,4 +29,8 @@ end
 
 function Ammo:destroy()
     Ammo.super.destroy(self)
+end
+
+function Ammo:handleCollision()
+    self.dead = true
 end
